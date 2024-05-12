@@ -4,6 +4,7 @@ import AddTodoForm from "./Components/AddTodoForm"
 import './App.css'
 import TodoItem from './Components/TodoItem'
 import {dummyData} from "./data/todos"
+import TodoList from './Components/TodoList'
  console.log(dummyData)
 function App() {
 
@@ -36,6 +37,12 @@ function App() {
   
 }
 
+  
+  function deleteTodo(id:number) {
+
+    setTodos((prevTodos)=> prevTodos.filter(todo => todo.id !== id))
+    
+  }
 
   return (
     <div className='flex justify-center items-center h-screen'>
@@ -43,14 +50,13 @@ function App() {
         <h1 className='text-center'>TODO LIST</h1>
      <AddTodoForm onSubmit={addTodo} />
 
-      <div className='mx-auto text-center'>
-        {todos.map((todo) => (
-          <TodoItem todo={todo}
-            key={todo.id}
-            onCompletedChange={setTodosCompleted} />
-          )
-        )}
-        </div>
+        <TodoList
+        
+          todos={todos}
+          onCompletedChange={setTodosCompleted}
+                      onDelete={deleteTodo}
+
+        />
         </div>
 </div>
   )
